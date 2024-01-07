@@ -431,6 +431,9 @@ int zmk_hid_mouse_buttons_release(zmk_mouse_button_flags_t buttons) {
     }
     return 0;
 }
+<<<<<<< HEAD
+void zmk_hid_mouse_clear(void) { memset(&mouse_report.body, 0, sizeof(mouse_report.body)); }
+=======
 
 void zmk_hid_mouse_movement_set(int16_t x, int16_t y) {
     mouse_report.body.d_x = x;
@@ -459,7 +462,8 @@ void zmk_hid_mouse_scroll_update(int8_t x, int8_t y) {
             mouse_report.body.d_scroll_y);
 }
 
-void zmk_hid_mouse_clear(void) { memset(&mouse_report.body, 0, sizeof(mouse_report.body)); }
+void zmk_hid_mouse_clear() { memset(&mouse_report.body, 0, sizeof(mouse_report.body)); }
+>>>>>>> brave/feat/mouse-keys-3.2
 
 #endif // IS_ENABLED(CONFIG_ZMK_MOUSE)
 
