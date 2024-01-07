@@ -1,10 +1,28 @@
 # ZMK Firmware: Personal fork
 
 This is my personal ZMK fork containing various experimental features used in
-my [zmk-config](https://github.com/urob/zmk-config/). It is regularly rebased
-onto the latest upstream.
+my [zmk-config](https://github.com/urob/zmk-config/). This particular branch
+contains a backport by Cem Aksoylar that ports the new pointer API in
+[#2027](https://github.com/zmkfirmware/zmk/pull/2027) to Zephyr 3.2. The branch
+is transitional and will be retired once the new API is merged into upstream.
 
-Below is a list of features currently included in the `main` branch _on top of_
+Note that if you are switching to the new pointer API from the [original mouse
+PR](https://github.com/zmkfirmware/zmk/pull/778), then the following
+adjustments are necessary in your `zmk-config`:
+
+- `&mwh` --> `&msc`
+- `MOVE_VERT` --> `MOVE_Y`
+- `MOVE_HOR` --> `MOVE_X`
+- `SCROLL_VERT` --> `SCRL_Y`
+- `SCROLL_HOR` --> `SCRL_X`
+
+E.g., this is my current [mouse
+configuration](https://github.com/urob/zmk-config/blob/upstream-mouse/config/mouse.dtsi)
+using the new api.
+
+---
+
+Below is a list of features currently included in this branch _on top of_
 the official ZMK master branch.
 
 - **pointer movement/scrolling** - [backport](https://github.com/caksoylar/zmk/tree/feat/mouse-keys-3.2) of #2027 by Cem Aksoylar
