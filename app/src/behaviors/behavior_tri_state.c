@@ -127,7 +127,7 @@ static bool is_layer_ignored(struct active_tri_state *tri_state, int32_t layer) 
 
 static int on_tri_state_binding_pressed(struct zmk_behavior_binding *binding,
                                         struct zmk_behavior_binding_event event) {
-    const struct device *dev = device_get_binding(binding->behavior_dev);
+    const struct device *dev = zmk_behavior_get_binding(binding->behavior_dev);
     const struct behavior_tri_state_config *cfg = dev->config;
     struct active_tri_state *tri_state;
     tri_state = find_tri_state(event.position);
@@ -164,7 +164,7 @@ static void release_tri_state(struct zmk_behavior_binding_event event,
 
 static int on_tri_state_binding_released(struct zmk_behavior_binding *binding,
                                          struct zmk_behavior_binding_event event) {
-    const struct device *dev = device_get_binding(binding->behavior_dev);
+    const struct device *dev = zmk_behavior_get_binding(binding->behavior_dev);
     const struct behavior_tri_state_config *cfg = dev->config;
     LOG_DBG("%d tri_state keybind released", event.position);
     release_tri_state(event, (struct zmk_behavior_binding *)&cfg->continue_behavior);
@@ -274,7 +274,7 @@ static int tri_state_layer_state_changed_listener(const zmk_event_t *eh) {
 
 #define _TRANSFORM_ENTRY(idx, node)                                                                \
     {                                                                                              \
-        .behavior_dev = DT_LABEL(DT_INST_PHANDLE_BY_IDX(node, bindings, idx)),                     \
+        .behavior_dev = DEVICE_DT_NAME(DT_INST_PHANDLE_BY_IDX(node, bindings, idx)),               \
         .param1 = COND_CODE_0(DT_INST_PHA_HAS_CELL_AT_IDX(node, bindings, idx, param1), (0),       \
                               (DT_INST_PHA_BY_IDX(node, bindings, idx, param1))),                  \
         .param2 = COND_CODE_0(DT_INST_PHA_HAS_CELL_AT_IDX(node, bindings, idx, param2), (0),       \
@@ -294,8 +294,8 @@ static int tri_state_layer_state_changed_listener(const zmk_event_t *eh) {
         .start_behavior = _TRANSFORM_ENTRY(0, n),                                                  \
         .continue_behavior = _TRANSFORM_ENTRY(1, n),                                               \
         .end_behavior = _TRANSFORM_ENTRY(2, n)};                                                   \
-    DEVICE_DT_INST_DEFINE(n, behavior_tri_state_init, NULL, NULL, &behavior_tri_state_config_##n,  \
-                          APPLICATION, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT,                        \
-                          &behavior_tri_state_driver_api);
+    BEHAVIOR_DT_INST_DEFINE(n, behavior_tri_state_init, NULL, NULL,                                \
+                            &behavior_tri_state_config_##n, APPLICATION,                           \
+                            CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, &behavior_tri_state_driver_api);
 
 DT_INST_FOREACH_STATUS_OKAY(TRI_STATE_INST)
