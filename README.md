@@ -1,5 +1,10 @@
 # ZMK Firmware: Personal fork
 
+Note: this branch is no longer maintained. See the [main branch](https://github.com/urob/zmk/tree/main)
+of this repo for a current branch.
+
+---
+
 This is my personal ZMK fork containing various experimental features used in
 my [zmk-config](https://github.com/urob/zmk-config/). This particular branch
 contains a backport by Cem Aksoylar that ports the new pointer API in
