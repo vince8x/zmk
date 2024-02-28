@@ -12,13 +12,13 @@ version with the original mouse PR #778, then the following
 adjustments are necessary in your `zmk-config`:
 
 - `&mwh` --> `&msc`
-- `MOVE_VERT` --> `MOVE_Y`
-- `MOVE_HOR` --> `MOVE_X`
-- `SCROLL_VERT` --> `SCRL_Y`
-- `SCROLL_HOR` --> `SCRL_X`
+- `MOVE_VERT` --> `MOVE_Y` or `MOVE_LEFT`/`MOVE_RIGHT`
+- `MOVE_HOR` --> `MOVE_X` or `MOVE_UP`/`MOVE_DOWN`
+- `SCROLL_VERT` --> `MOVE_Y` or `SCRL_UP`/`SCRL_DOWN`
+- `SCROLL_HOR` --> `MOVE_X` or `SCRL_LEFT`/`SCRL_RIGHT`
 
 E.g., this is my current [mouse
-configuration](https://github.com/urob/zmk-config/blob/upstream-mouse/config/mouse.dtsi)
+configuration](https://github.com/urob/zmk-config/blob/main/config/mouse.dtsi)
 using the new api.
 
 ---
