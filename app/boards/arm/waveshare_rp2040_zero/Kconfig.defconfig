@@ -1,37 +1,15 @@
-/*
- * Copyright (c) 2023 The ZMK Contributors
- * SPDX-License-Identifier: Apache-2.0
- */
+# Copyright (c) 2023 The ZMK Contributors
+# SPDX-License-Identifier: Apache-2.0
 
-#include <dt-bindings/pinctrl/rpi-pico-rp2040-pinctrl.h>
+if BOARD_WAVESHARE_RP2040_ZERO
 
-&pinctrl {
-	uart1_default: uart0_default {
-		group1 {
-			pinmux = <UART1_TX_P20>;
-		};
-		group2 {
-			pinmux = <UART1_RX_P5>;
-			input-enable;
-		};
-	};
+config BOARD
+	default "waveshare_rp2040_zero"
 
-	i2c1_default: i2c1_default {
-		group1 {
-			pinmux = <I2C1_SDA_P22>, <I2C1_SCL_P23>;
-			input-enable;
-			input-schmitt-enable;
-		};
-	};
+config RP2_FLASH_W25Q080
+	default y
 
+config ZMK_USB
+	default y
 
-	spi0_default: spi0_default {
-		group1 {
-			pinmux = <SPI0_TX_P3>, <SPI0_SCK_P6>;
-		};
-		group2 {
-			pinmux = <SPI0_RX_P4>;
-			input-enable;
-		};
-	};
-};
+endif # BOARD_WAVESHARE_RP2040_ZERO
